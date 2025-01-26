@@ -31,7 +31,6 @@ function M.parse_input(input)
     if #input == 1 then return { M._parse_from_int(input:byte(1)) } end
 
     local head, tail = 1, input:len()
-    if input:sub(1, 1) == '0' then head = head + 2 end
     local orig_head = head
 
 
@@ -110,7 +109,7 @@ function M._itob(input)
     return result
 end
 
----Checks if the string has the given number format header and returns the start of the value if it does, otherwise 0
+---Checks if the string has the given number format header and returns the start of the value if it does, otherwise 1
 ---@param str string
 ---@param header string[] the list of single-character format specifiers
 ---@return integer
@@ -126,7 +125,7 @@ function M._check_header(str, header)
         end
     end
 
-    return 0
+    return 1
 end
 
 ---Create a HexerChar from a given integer

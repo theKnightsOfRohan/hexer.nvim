@@ -32,8 +32,8 @@ describe("Parser", function()
 
         val_pos = Parser._check_header(strs[1], headers[2])
 
-        assert(val_pos == 0,
-            ("String %s with headers %s expected pos %s but got %s"):format(strs[1], vim.inspect(headers[2]), 0, val_pos)
+        assert(val_pos == 1,
+            ("String %s with headers %s expected pos %s but got %s"):format(strs[1], vim.inspect(headers[2]), 1, val_pos)
         )
 
         val_pos = Parser._check_header(strs[2], headers[1])
@@ -44,8 +44,8 @@ describe("Parser", function()
 
         val_pos = Parser._check_header(strs[2], headers[2])
 
-        assert(val_pos == 0,
-            ("String %s with headers %s expected pos %s but got %s"):format(strs[2], vim.inspect(headers[2]), 0, val_pos)
+        assert(val_pos == 1,
+            ("String %s with headers %s expected pos %s but got %s"):format(strs[2], vim.inspect(headers[2]), 1, val_pos)
         )
     end)
 
