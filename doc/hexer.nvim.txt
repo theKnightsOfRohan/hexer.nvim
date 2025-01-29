@@ -112,6 +112,7 @@ your other plugin manager’s default method.
 TODO                                              *hexer.nvim-hexer.nvim-todo*
 
 - Handle negative numbers more gracefully
+- Open hexer on highlighted selection
 - Create abstraction for representation format
 - Create config for representation format
 - Create config for hexer popup options
