@@ -67,8 +67,8 @@ require("hexer"):close()
 This plugin doesn't take advantage of any special lazy.nvim stuff, just use your other plugin manager's default method.
 
 ## TODO
-[ ] Handle negative numbers more gracefully
-[ ] Create abstraction for representation format
-[ ] Create config for representation format
-[ ] Create config for hexer popup options
+- [ ] Handle negative numbers more gracefully
+- [ ] Create abstraction for representation format
+- [ ] Create config for representation format
+- [ ] Create config for hexer popup options
 
