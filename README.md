@@ -70,6 +70,7 @@ This plugin doesn't take advantage of any special lazy.nvim stuff, just use your
 
 ## TODO
 - [ ] Handle negative numbers more gracefully
+- [ ] Open hexer on highlighted selection
 - [ ] Create abstraction for representation format
 - [ ] Create config for representation format
 - [ ] Create config for hexer popup options
