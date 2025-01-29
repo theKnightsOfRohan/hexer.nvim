@@ -2,6 +2,8 @@
 
 A simple plugin to make working with binary representations painless, fast, and efficient.
 
+[hexer_demo](./hexer_demo.mov)
+
 ## Why did I need hexer?
 
 Look, I have an okay workflow. I fullscreen my terminal and my browser, so I can switch between them with one click of a button. This works fine for when I'm researching or looking at requirements. However, when writing assembly code for my classes, constantly switching between neovim and an ascii table is annoying, as well as requiring a couple seconds to search through the table. With hexer, you can quickly convert from one representation to another, as well as easily see multiple at once.
