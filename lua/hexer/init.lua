@@ -6,10 +6,12 @@ local M = {
     _display = require("hexer.display"),
 }
 
-M.hexer_open = M._display.hexer_open
-M.hexer_close = M._display.hide_window
+M.hexer_open = function(self, arg) self._display:hexer_open(arg) end
+M.hexer_close = function(self) self._display:hide_window() end
 
 function M.setup()
+    M._display:_setup_window()
+
     vim.api.nvim_create_user_command("Hexer", function(opts)
         M._display:hexer_open(opts.args)
     end, { nargs = "?" })
