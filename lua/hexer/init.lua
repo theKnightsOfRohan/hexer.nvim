@@ -6,8 +6,8 @@ local M = {
     _display = require("hexer.display"),
 }
 
-M.hexer_open = function(self, arg) self._display:hexer_open(arg) end
-M.hexer_close = function(self) self._display:hide_window() end
+M.open = function(self, arg) self._display:hexer_open(arg) end
+M.close = function(self) self._display:hide_window() end
 
 function M.setup()
     M._display:_setup_window()
