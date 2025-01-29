@@ -59,21 +59,21 @@ function M.stoi(input)
     return tonumber(input, 10);
 end
 
----String in decimal form to integer
+---String in hex form to integer
 ---@param input string
 ---@return integer
 function M.xtoi(input)
     return tonumber(input, 16);
 end
 
----String in decimal form to integer
+---String in binary form to integer
 ---@param input string
 ---@return integer
 function M.btoi(input)
     return tonumber(input, 2);
 end
 
----String in decimal form to integer
+---String in octal form to integer
 ---@param input string
 ---@return integer
 function M.otoi(input)

@@ -43,13 +43,13 @@ function M.parse_input(input)
     end
 
     head = M._utils.check_header(input, { 'b', 'B' })
-    dec_val = M._utils.xtoi(input:sub(head))
+    dec_val = M._utils.btoi(input:sub(head))
     if dec_val ~= nil and head ~= orig_head then
         return { M.parse_from_int(M._utils.btoi(input:sub(head)), { binary = input }) }
     end
 
     head = M._utils.check_header(input, { 'o', 'O' })
-    dec_val = M._utils.xtoi(input:sub(head))
+    dec_val = M._utils.otoi(input:sub(head))
     if dec_val ~= nil and head ~= orig_head then
         return { M.parse_from_int(M._utils.otoi(input:sub(head)), { octal = input }) }
     end
