@@ -91,5 +91,20 @@ describe("Parser", function()
                     string.format("String: expected %s, actual %s", tostring(v), tostring(item[k])))
             end
         end
+
+        parsed = Parser.parse_input("EEEE")
+
+        assert(parsed)
+
+        assert(#parsed == 4, string.format("String: expected length 4, got %s", tostring(#parsed)))
+
+        for _, item in pairs(parsed) do
+            assert(item)
+
+            for k, v in pairs(base_target) do
+                assert(v == item[k],
+                    string.format("String: expected %s, actual %s", tostring(v), tostring(item[k])))
+            end
+        end
     end)
 end)

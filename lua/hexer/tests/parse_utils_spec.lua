@@ -9,7 +9,11 @@ describe("Parse Utils", function()
             ["'p'"] = true,
             ['"p"'] = true,
             ["'potato'"] = true,
-            ['"potato"'] = true
+            ['"potato"'] = true,
+            ["potato'"] = false,
+            ["'potato"] = false,
+            ['potato"'] = false,
+            ['"potato'] = false,
         }
 
         local res
