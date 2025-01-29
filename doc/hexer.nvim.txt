@@ -15,7 +15,7 @@ Table of Contents                               *hexer.nvim-table-of-contents*
 A simple plugin to make working with binary representations painless, fast, and
 efficient.
 
-hexer_demo <./hexer_demo.mov>
+hexer_demo <./hexer_demo.gif>
 
 
 WHY DID I NEED HEXER?            *hexer.nvim-hexer.nvim-why-did-i-need-hexer?*
