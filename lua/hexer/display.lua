@@ -49,6 +49,8 @@ local M = {
     }
 }
 
+---Hide the hexer window. Already bound to q & esc by default.
+---@param self HexerDisplay
 function M.hide_window(self)
     self._window:hide()
     self:_apply_buf_opts()
@@ -115,6 +117,9 @@ function M._fit_table(self)
     })
 end
 
+---Opens the hexer buffer and updates it with the parsed arg.
+---@param self HexerDisplay
+---@param arg string | nil If nil or empty, will toggle buffer without updating
 function M.hexer_open(self, arg)
     self:_save_buf_opts()
 
