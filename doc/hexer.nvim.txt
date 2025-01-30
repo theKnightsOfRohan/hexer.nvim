@@ -1,4 +1,4 @@
-*hexer.nvim.txt*        For Neovim >= 0.8.0       Last change: 2025 January 29
+*hexer.nvim.txt*        For Neovim >= 0.8.0       Last change: 2025 January 30
 
 ==============================================================================
 Table of Contents                               *hexer.nvim-table-of-contents*
