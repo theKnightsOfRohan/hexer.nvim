@@ -2,7 +2,7 @@
 
 A simple plugin to make working with binary representations painless, fast, and efficient.
 
-![hexer_demo](./hexer_demo.gif)
+![hexer_demo](./assets/hexer_demo.gif)
 
 ## Why did I need hexer?
 
