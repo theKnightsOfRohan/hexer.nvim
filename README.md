@@ -42,6 +42,8 @@ For example, `:Hexer "0x45"` would produce the following table:
 └─────┴─────┴────┴─────────┴─────┘
 ```
 
+You can also run `:Hexer` on a highlighted selection in visual mode, allowing for an easier time looking at unfamiliar code. The argument is restricted from being multiple lines, and it is unadvisable to try and parse a string which is too long.
+
 ## Installation
 *We do be kinda lazy.*
 
@@ -59,10 +61,10 @@ return {
 
 Hexer also exposes two lua functions:
 ```lua
--- open() works the same way as the `:Hexer` command, with both nil representing no argument.
+-- open() parses the passed string arg and opens the hexr buffer, with nil or an empty string representing retaining the past table.
 require("hexer"):open(arg)
 -- close() is how the hexer buffer closes normally. Useful if you want to remap your own close keys.
--- Note that a BufLeave autocmd is with this already set
+-- Note that a BufLeave autocmd is already set for if you leave hexer or open another buffer with it open.
 require("hexer"):close()
 ```
 
@@ -70,9 +72,9 @@ This plugin doesn't take advantage of any special lazy.nvim stuff, just use your
 
 ## TODO
 - [ ] Handle negative numbers more gracefully
-- [ ] Open hexer on highlighted selection
+- [x] Open hexer on highlighted selection
 - [ ] Create abstraction for representation format
 - [ ] Create config for representation format
 - [ ] Create config for hexer popup options
 - [ ] Expand into some binary operations?
-
+- [ ] Gracefully handle abnormal ascii characters
