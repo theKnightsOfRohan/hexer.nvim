@@ -3,44 +3,48 @@ local Table = require("nui.table")
 local Event = require("nui.utils.autocmd").event
 local Parser = require("hexer.parser")
 
+local _w = Popup({
+    enter = true,
+    focusable = true,
+    anchor = "SE",
+    border = {
+        style = "rounded",
+    },
+    position = {
+        row = "100%",
+        col = "100%",
+    },
+    size = {
+        width = 420,
+        height = 69,
+    },
+    buf_options = {
+        buftype = "nofile",
+        buflisted = false,
+        modifiable = false,
+    }
+})
+
+local _t = Table({
+    bufnr = _w.bufnr,
+    ns_id = "HexerWindow",
+    columns = {
+        { accessor_key = "ascii",  header = "Ascii" },
+        { accessor_key = "value",  header = "Value" },
+        { accessor_key = "hex",    header = "Hex" },
+        { accessor_key = "binary", header = "Binary" },
+        { accessor_key = "octal",  header = "Octal" },
+    },
+    ---@type HexerItem
+    data = Parser.parse_input("69"),
+})
+
 ---@class HexerDisplay
 ---@field _window NuiPopup
 ---@field _table NuiTable
 local M = {
-    _window = Popup({
-        enter = true,
-        focusable = true,
-        anchor = "SE",
-        border = {
-            style = "rounded",
-        },
-        position = {
-            row = "100%",
-            col = "100%",
-        },
-        size = {
-            width = 420,
-            height = 69,
-        },
-        buf_options = {
-            buftype = "nofile",
-            buflisted = false,
-            modifiable = false,
-        }
-    }),
-    _table = Table({
-        bufnr = 0,
-        ns_id = "HexerWindow",
-        columns = {
-            { accessor_key = "ascii",  header = "Ascii" },
-            { accessor_key = "value",  header = "Value" },
-            { accessor_key = "hex",    header = "Hex" },
-            { accessor_key = "binary", header = "Binary" },
-            { accessor_key = "octal",  header = "Octal" },
-        },
-        ---@type HexerItem
-        data = Parser.parse_input("69"),
-    }),
+    _window = _w,
+    _table = _t,
     _saved_buf = 0,
     _saved_buf_opts = {
         ["buftype"] = "",
