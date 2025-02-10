@@ -80,7 +80,7 @@ function M.parse_from_int(value, context)
         value = context.value or tostring(value),
         hex = context.hex or ("0x" .. string.format("%X", value)),
         octal = context.octal or ("0o" .. string.format("%o", value)),
-        ascii = context.ascii or (string.format("%c", value)),
+        ascii = require("hexer.converters").ascii(value, context),
         binary = context.binary or ("0b" .. M._utils.itob(value)),
     }
 

@@ -77,4 +77,4 @@ This plugin doesn't take advantage of any special lazy.nvim stuff, just use your
 - [ ] Create config for representation format
 - [ ] Create config for hexer popup options
 - [ ] Expand into some binary operations?
-- [ ] Gracefully handle abnormal ascii characters
+- [x] Gracefully handle abnormal ascii characters
