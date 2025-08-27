@@ -3,27 +3,31 @@ local Table = require("nui.table")
 local Event = require("nui.utils.autocmd").event
 local Parser = require("hexer.parser")
 
-local _w = Popup({
-    enter = true,
-    focusable = true,
-    anchor = "SE",
-    border = {
-        style = "rounded",
-    },
-    position = {
-        row = "100%",
-        col = "100%",
-    },
-    size = {
-        width = 420,
-        height = 69,
-    },
-    buf_options = {
-        buftype = "nofile",
-        buflisted = false,
-        modifiable = false,
-    }
-})
+local function _create_win()
+    return Popup({
+        enter = true,
+        focusable = true,
+        anchor = "SE",
+        border = {
+            style = "rounded",
+        },
+        position = {
+            row = "100%",
+            col = "100%",
+        },
+        size = {
+            width = 420,
+            height = 69,
+        },
+        buf_options = {
+            buftype = "nofile",
+            buflisted = false,
+            modifiable = false,
+        },
+    })
+end
+
+local _w = _create_win()
 
 local _t = Table({
     bufnr = _w.bufnr,
@@ -50,7 +54,7 @@ local M = {
         ["buftype"] = "",
         ["modifiable"] = false,
         ["readonly"] = false,
-    }
+    },
 }
 
 ---Hide the hexer window. Already bound to q & esc by default.
@@ -61,13 +65,23 @@ function M.hide_window(self)
 end
 
 function M._show_window(self)
+    -- https://github.com/theKnightsOfRohan/hexer.nvim/issues/2
+    if not vim.api.nvim_win_is_valid(self._window.win_config.win) then
+        self._window = _create_win()
+        self._table.bufnr = self._window.bufnr
+    end
+
     self._window:show()
     self._window:on(Event.BufLeave, function()
         self:hide_window()
     end)
 
-    self._window:map("n", "<Esc>", function() self:hide_window() end, {})
-    self._window:map("n", "q", function() self:hide_window() end, {})
+    self._window:map("n", "<Esc>", function()
+        self:hide_window()
+    end, {})
+    self._window:map("n", "q", function()
+        self:hide_window()
+    end, {})
 
     self._table.bufnr = self._window.bufnr
 
@@ -79,11 +93,11 @@ end
 
 ---@param fun function
 function M._smodify(self, fun)
-    vim.api.nvim_set_option_value('modifiable', true, { buf = self._window.bufnr })
-    vim.api.nvim_set_option_value('readonly', false, { buf = self._window.bufnr })
+    vim.api.nvim_set_option_value("modifiable", true, { buf = self._window.bufnr })
+    vim.api.nvim_set_option_value("readonly", false, { buf = self._window.bufnr })
     fun()
-    vim.api.nvim_set_option_value('modifiable', false, { buf = self._window.bufnr })
-    vim.api.nvim_set_option_value('readonly', true, { buf = self._window.bufnr })
+    vim.api.nvim_set_option_value("modifiable", false, { buf = self._window.bufnr })
+    vim.api.nvim_set_option_value("readonly", true, { buf = self._window.bufnr })
 end
 
 ---Update the table with the new arg
@@ -116,7 +130,7 @@ function M._fit_table(self)
         anchor = "NW",
         position = {
             row = "100%",
-            col = "100%"
+            col = "100%",
         },
     })
 end
