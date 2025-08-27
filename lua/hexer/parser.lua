@@ -1,7 +1,7 @@
 ---@class HexerParser
 local M = {
     ---@private
-    _utils = require("hexer.parse_utils")
+    _utils = require("hexer.parse_utils"),
 }
 
 ---@class HexerCharContext
@@ -29,26 +29,26 @@ function M.parse_input(input)
         return { M.parse_from_int(value, { value = tostring(value) }) }
     end
 
-    if #input == 1 then return { M.parse_from_int(input:byte(1), { ascii = input }) } end
+    if #input == 1 then
+        return { M.parse_from_int(input:byte(1), { ascii = input }) }
+    end
 
     local head, tail = 1, input:len()
     local orig_head = head
 
-    local dec_val = 0
-
-    head = M._utils.check_header(input, { 'x', 'X' })
-    dec_val = M._utils.xtoi(input:sub(head))
+    head = M._utils.check_header(input, { "x", "X" })
+    local dec_val = M._utils.xtoi(input:sub(head))
     if dec_val ~= nil and head ~= orig_head then
         return { M.parse_from_int(dec_val, { hex = input }) }
     end
 
-    head = M._utils.check_header(input, { 'b', 'B' })
+    head = M._utils.check_header(input, { "b", "B" })
     dec_val = M._utils.btoi(input:sub(head))
     if dec_val ~= nil and head ~= orig_head then
         return { M.parse_from_int(M._utils.btoi(input:sub(head)), { binary = input }) }
     end
 
-    head = M._utils.check_header(input, { 'o', 'O' })
+    head = M._utils.check_header(input, { "o", "O" })
     dec_val = M._utils.otoi(input:sub(head))
     if dec_val ~= nil and head ~= orig_head then
         return { M.parse_from_int(M._utils.otoi(input:sub(head)), { octal = input }) }

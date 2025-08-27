@@ -34,7 +34,7 @@ function M.check_header(str, header)
         end
 
         -- Should never occur, but just in case
-        if str:sub(1, 1) == '0' and str:sub(2, 2) == ch then
+        if str:sub(1, 1) == "0" and str:sub(2, 2) == ch then
             return 3
         end
     end
@@ -46,38 +46,39 @@ end
 ---@param str string
 ---@return boolean
 function M.is_string_wrapped(str)
-    return #str >= 3 and (
-        (str:sub(1, 1) == '"' and str:sub(str:len()) == '"') or
-        (str:sub(1, 1) == "'" and str:sub(str:len()) == "'")
-    )
+    return #str >= 3
+        and (
+            (str:sub(1, 1) == '"' and str:sub(str:len()) == '"')
+            or (str:sub(1, 1) == "'" and str:sub(str:len()) == "'")
+        )
 end
 
 ---String in decimal form to integer
 ---@param input string
 ---@return integer
 function M.stoi(input)
-    return tonumber(input, 10);
+    return tonumber(input, 10)
 end
 
 ---String in hex form to integer
 ---@param input string
 ---@return integer
 function M.xtoi(input)
-    return tonumber(input, 16);
+    return tonumber(input, 16)
 end
 
 ---String in binary form to integer
 ---@param input string
 ---@return integer
 function M.btoi(input)
-    return tonumber(input, 2);
+    return tonumber(input, 2)
 end
 
 ---String in octal form to integer
 ---@param input string
 ---@return integer
 function M.otoi(input)
-    return tonumber(input, 8);
+    return tonumber(input, 8)
 end
 
 return M

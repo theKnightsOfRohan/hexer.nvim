@@ -35,8 +35,10 @@ describe("Parser", function()
         assert(#parsed == 1, string.format("Ascii character: expected length 1, is instead %s", tostring(#parsed)))
 
         for k, v in pairs(base_target) do
-            assert(v == parsed[1][k],
-                string.format("Ascii character: expected %s, actual %s", tostring(v), tostring(parsed[1][k])))
+            assert(
+                v == parsed[1][k],
+                string.format("Ascii character: expected %s, actual %s", tostring(v), tostring(parsed[1][k]))
+            )
         end
     end)
 
@@ -47,8 +49,10 @@ describe("Parser", function()
         assert(#parsed == 1, string.format("Binary: expected length 1, is instead %s", tostring(#parsed)))
 
         for k, v in pairs(base_target) do
-            assert(v == parsed[1][k],
-                string.format("Binary: expected %s, actual %s", tostring(v), tostring(parsed[1][k])))
+            assert(
+                v == parsed[1][k],
+                string.format("Binary: expected %s, actual %s", tostring(v), tostring(parsed[1][k]))
+            )
         end
     end)
 
@@ -59,8 +63,10 @@ describe("Parser", function()
         assert(#parsed == 1, string.format("Hexadecimal: expected length 1, is instead %s", tostring(#parsed)))
 
         for k, v in pairs(base_target) do
-            assert(v == parsed[1][k],
-                string.format("Hexadecimal: expected %s, actual %s", tostring(v), tostring(parsed[1][k])))
+            assert(
+                v == parsed[1][k],
+                string.format("Hexadecimal: expected %s, actual %s", tostring(v), tostring(parsed[1][k]))
+            )
         end
     end)
 
@@ -71,13 +77,15 @@ describe("Parser", function()
         assert(#parsed == 1, string.format("Octal: expected length 1, is instead %s", tostring(#parsed)))
 
         for k, v in pairs(base_target) do
-            assert(v == parsed[1][k],
-                string.format("Octal: expected %s, actual %s", tostring(v), tostring(parsed[1][k])))
+            assert(
+                v == parsed[1][k],
+                string.format("Octal: expected %s, actual %s", tostring(v), tostring(parsed[1][k]))
+            )
         end
     end)
 
     it("should be able to parse a multi-character string", function()
-        local parsed = Parser.parse_input("\"EEEE\"")
+        local parsed = Parser.parse_input('"EEEE"')
 
         assert(parsed)
 
@@ -87,8 +95,7 @@ describe("Parser", function()
             assert(item)
 
             for k, v in pairs(base_target) do
-                assert(v == item[k],
-                    string.format("String: expected %s, actual %s", tostring(v), tostring(item[k])))
+                assert(v == item[k], string.format("String: expected %s, actual %s", tostring(v), tostring(item[k])))
             end
         end
 
@@ -102,8 +109,7 @@ describe("Parser", function()
             assert(item)
 
             for k, v in pairs(base_target) do
-                assert(v == item[k],
-                    string.format("String: expected %s, actual %s", tostring(v), tostring(item[k])))
+                assert(v == item[k], string.format("String: expected %s, actual %s", tostring(v), tostring(item[k])))
             end
         end
     end)

@@ -39,7 +39,7 @@ function M.ascii(value, context)
         [30] = "RS",
         [31] = "US",
         [32] = "SP",
-        [127] = "DEL"
+        [127] = "DEL",
     }
 
     local out = codes[value] or context.ascii or (string.format("%c", value))
