@@ -9,7 +9,7 @@ local function _create_win()
         focusable = true,
         anchor = "SE",
         border = {
-            style = "rounded",
+            style = "none",
         },
         position = {
             row = "100%",
