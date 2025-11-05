@@ -25,17 +25,12 @@ end
 
 ---Checks if the string has the given number format header and returns the start of the value if it does, otherwise 1
 ---@param str string
----@param header string[] the list of single-character format specifiers
----@return integer
-function M.check_header(str, header)
-    for _, ch in ipairs(header) do
-        if str:sub(1, 1) == ch then
-            return 2
-        end
-
-        -- Should never occur, but just in case
-        if str:sub(1, 1) == "0" and str:sub(2, 2) == ch then
-            return 3
+---@param prefixes string[] the list of single-character format specifiers
+---@return integer the index of the string without the prefix
+function M.check_prefix(str, prefixes)
+    for _, ch in ipairs(prefixes) do
+        if vim.startswith(str, ch) then
+            return #ch + 1
         end
     end
 

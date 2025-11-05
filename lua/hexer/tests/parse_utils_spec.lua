@@ -26,9 +26,9 @@ describe("Parse Utils", function()
 
     it("should see if a given string contains the header", function()
         local strs = { "0b0011", "B0011" }
-        local headers = { { "b", "B" }, { "x", "X" } }
+        local headers = { { "0b", "0B", "b", "B" }, { "0x", "0X", "x", "X" } }
 
-        local val_pos = Utils.check_header(strs[1], headers[1])
+        local val_pos = Utils.check_prefix(strs[1], headers[1])
 
         assert(
             val_pos == 3,
@@ -40,7 +40,7 @@ describe("Parse Utils", function()
             )
         )
 
-        val_pos = Utils.check_header(strs[1], headers[2])
+        val_pos = Utils.check_prefix(strs[1], headers[2])
 
         assert(
             val_pos == 1,
@@ -52,7 +52,7 @@ describe("Parse Utils", function()
             )
         )
 
-        val_pos = Utils.check_header(strs[2], headers[1])
+        val_pos = Utils.check_prefix(strs[2], headers[1])
 
         assert(
             val_pos == 2,
@@ -64,7 +64,7 @@ describe("Parse Utils", function()
             )
         )
 
-        val_pos = Utils.check_header(strs[2], headers[2])
+        val_pos = Utils.check_prefix(strs[2], headers[2])
 
         assert(
             val_pos == 1,

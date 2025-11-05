@@ -4,66 +4,46 @@ local M = {
     _utils = require("hexer.parse_utils"),
 }
 
----@class HexerCharContext
----@field ascii? string
----@field value? string
----@field hex? string
----@field binary? string
----@field octal? string
-
----@class HexerChar
----@field ascii string
----@field value string
----@field hex string
----@field binary string
----@field octal string
-
+---@alias HexerCharContext table<string, string | nil>
+---@alias HexerChar table<string, string>
 ---@alias HexerItem HexerChar[]
 
----Parse an input given by the user into a HexerItem, last resorts to string
 ---@param input string
+---@param converters HexerConverterGroup
 ---@return HexerItem
-function M.parse_input(input)
+function M.parse_input(input, converters)
     local value = tonumber(input)
     if value ~= nil then
-        return { M.parse_from_int(value, { value = tostring(value) }) }
+        return { M.parse_from_int(value, { value = tostring(value) }, converters) }
     end
 
     if #input == 1 then
-        return { M.parse_from_int(input:byte(1), { ascii = input }) }
-    end
-
-    local head, tail = 1, input:len()
-    local orig_head = head
-
-    head = M._utils.check_header(input, { "x", "X" })
-    local dec_val = M._utils.xtoi(input:sub(head))
-    if dec_val ~= nil and head ~= orig_head then
-        return { M.parse_from_int(dec_val, { hex = input }) }
-    end
-
-    head = M._utils.check_header(input, { "b", "B" })
-    dec_val = M._utils.btoi(input:sub(head))
-    if dec_val ~= nil and head ~= orig_head then
-        return { M.parse_from_int(M._utils.btoi(input:sub(head)), { binary = input }) }
-    end
-
-    head = M._utils.check_header(input, { "o", "O" })
-    dec_val = M._utils.otoi(input:sub(head))
-    if dec_val ~= nil and head ~= orig_head then
-        return { M.parse_from_int(M._utils.otoi(input:sub(head)), { octal = input }) }
+        return { M.parse_from_int(input:byte(1), { ["ascii"] = input }, converters) }
     end
 
     ---@type HexerItem
     local item = {}
 
+    local head, tail = 1, input:len()
+
     if M._utils.is_string_wrapped(input) then
         head = head + 1
         tail = tail - 1
+
+        goto string
     end
 
+    for _, converter in ipairs(converters) do
+        if converter.is_type(input) then
+            return { M.parse_from_int(converter.to_value(input), { [converter.accessor_key] = input }, converters) }
+        end
+    end
+
+    ::string::
+
     for i = 1, tail - head + 1 do
-        item[i] = M.parse_from_int(input:byte(head + i - 1), { ascii = input:sub(head + i - 1, head + i - 1) })
+        item[i] =
+            M.parse_from_int(input:byte(head + i - 1), { ascii = input:sub(head + i - 1, head + i - 1) }, converters)
     end
 
     return item
@@ -72,17 +52,19 @@ end
 ---Create a HexerChar from a given integer
 ---@param value integer
 ---@param context HexerCharContext
+---@param converters HexerConverter[]
 ---@return HexerChar
-function M.parse_from_int(value, context)
+function M.parse_from_int(value, context, converters)
     ---@type HexerChar
     assert(value ~= nil)
+
     local item = {
         value = context.value or tostring(value),
-        hex = context.hex or ("0x" .. string.format("%X", value)),
-        octal = context.octal or ("0o" .. string.format("%o", value)),
-        ascii = require("hexer.converters").ascii(value, context),
-        binary = context.binary or ("0b" .. M._utils.itob(value)),
     }
+
+    for _, converter in ipairs(converters) do
+        item[converter.accessor_key] = context[converter.accessor_key] or converter.from_value(value)
+    end
 
     return item
 end

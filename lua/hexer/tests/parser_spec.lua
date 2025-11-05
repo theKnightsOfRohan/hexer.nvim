@@ -11,7 +11,7 @@ describe("Parser", function()
     }
 
     it("should be able to parse from a decimal value", function()
-        local parsed = Parser.parse_from_int(69, {})
+        local parsed = Parser.parse_from_int(69, {}, require("hexer.converters"))
 
         for k, v in pairs(base_target) do
             assert(v == parsed[k], string.format("Key %s: %s != %s", tostring(k), tostring(v), tostring(parsed[k])))
@@ -19,7 +19,7 @@ describe("Parser", function()
     end)
 
     it("should be able to parse from a decimal string", function()
-        local parsed = Parser.parse_input("69")
+        local parsed = Parser.parse_input("69", require("hexer.converters"))
 
         assert(#parsed == 1, string.format("Decimal string: expected length 1, is instead %s", tostring(#parsed)))
 
@@ -29,7 +29,7 @@ describe("Parser", function()
     end)
 
     it("should be able to parse from an ascii character", function()
-        local parsed = Parser.parse_input("E")
+        local parsed = Parser.parse_input("E", require("hexer.converters"))
         assert(parsed)
 
         assert(#parsed == 1, string.format("Ascii character: expected length 1, is instead %s", tostring(#parsed)))
@@ -43,7 +43,7 @@ describe("Parser", function()
     end)
 
     it("should be able to parse from a binary string", function()
-        local parsed = Parser.parse_input("0b1000101")
+        local parsed = Parser.parse_input("0b1000101", require("hexer.converters"))
         assert(parsed)
 
         assert(#parsed == 1, string.format("Binary: expected length 1, is instead %s", tostring(#parsed)))
@@ -57,7 +57,7 @@ describe("Parser", function()
     end)
 
     it("should be able to parse from a hex string", function()
-        local parsed = Parser.parse_input("0x45")
+        local parsed = Parser.parse_input("0x45", require("hexer.converters"))
         assert(parsed)
 
         assert(#parsed == 1, string.format("Hexadecimal: expected length 1, is instead %s", tostring(#parsed)))
@@ -71,7 +71,7 @@ describe("Parser", function()
     end)
 
     it("should be able to parse from a octal string", function()
-        local parsed = Parser.parse_input("0o105")
+        local parsed = Parser.parse_input("0o105", require("hexer.converters"))
         assert(parsed)
 
         assert(#parsed == 1, string.format("Octal: expected length 1, is instead %s", tostring(#parsed)))
@@ -85,7 +85,7 @@ describe("Parser", function()
     end)
 
     it("should be able to parse a multi-character string", function()
-        local parsed = Parser.parse_input('"EEEE"')
+        local parsed = Parser.parse_input('"EEEE"', require("hexer.converters"))
 
         assert(parsed)
 
@@ -99,7 +99,7 @@ describe("Parser", function()
             end
         end
 
-        parsed = Parser.parse_input("EEEE")
+        parsed = Parser.parse_input("EEEE", require("hexer.converters"))
 
         assert(parsed)
 
