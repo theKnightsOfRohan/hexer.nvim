@@ -1,4 +1,4 @@
-*hexer.nvim.txt*       For Neovim >= 0.8.0       Last change: 2025 November 05
+*hexer.nvim.txt*       For Neovim >= 0.8.0       Last change: 2025 November 06
 
 ==============================================================================
 Table of Contents                               *hexer.nvim-table-of-contents*
@@ -95,34 +95,84 @@ _We do be kinda lazy._
             "MunifTanjim/nui.nvim",
         },
         config = function()
-            require("hexer").setup()
+            local hexer = require("hexer")
+    
+            hexer:setup( --[[ insert config here ]] )
+    
+            -- Put your keymaps here...
+            -- open() parses the passed string arg and opens the hexer buffer, with nil or an empty string representing retaining the past table.
+            hexer:open(arg)
+            -- close() is how the hexer buffer closes normally. Useful if you want to remap your own close keys.
+            -- Note that a BufLeave autocmd is already set for if you leave hexer or open another buffer with it open.
+            hexer:close()
         end,
     }
-<
-
-Hexer also exposes two lua functions:
-
->lua
-    -- open() parses the passed string arg and opens the hexr buffer, with nil or an empty string representing retaining the past table.
-    require("hexer"):open(arg)
-    -- close() is how the hexer buffer closes normally. Useful if you want to remap your own close keys.
-    -- Note that a BufLeave autocmd is already set for if you leave hexer or open another buffer with it open.
-    require("hexer"):close()
 <
 
 This plugin doesn’t take advantage of any special lazy.nvim stuff, just use
 your other plugin manager’s default method.
 
+The default config is the below lua table(just leave everything blank by
+default):
+
+>lua
+    ---@class HexerConfig
+    ---@field converters HexerConverter[]
+    ---@field popup_opts nui_popup_options
+    ---@field table_opts nui_table_options
+    local config = {
+        converters = {}, -- This array will be appended onto the hexer default converter list
+        popup_opts = {
+            enter = true,
+            focusable = true,
+            anchor = "SE",
+            border = {
+                style = "none",
+            },
+            position = {
+                row = "100%",
+                col = "100%",
+            },
+            size = {
+                width = 420,
+                height = 69,
+            },
+            buf_options = {
+                buftype = "nofile",
+                buflisted = false,
+                modifiable = false,
+            },
+        },
+        ---@diagnostic disable-next-line: missing-fields
+        table_opts = {
+            bufnr = 0,
+            ns_id = "HexerWindow",
+        },
+    }
+<
+
+You can define new converters to add to hexer by specifying an array with each
+element of the below type:
+
+>lua
+    ---@class HexerConverter
+    ---@field accessor_key string
+    ---@field header string
+    ---@field is_type fun(str: string): boolean
+    ---@field to_value fun(str: string): integer
+    ---@field from_value fun(value: integer): string
+<
+
 
 TODO                                              *hexer.nvim-hexer.nvim-todo*
 
-- Handle negative numbers more gracefully
 - Open hexer on highlighted selection
 - Create abstraction for representation format
 - Create config for representation format
 - Create config for hexer popup options
-- Expand into some binary operations?
 - Gracefully handle abnormal ascii characters
+- Handle negative numbers more gracefully
+- Expand into some binary operations?
 
 ==============================================================================
 2. Links                                                    *hexer.nvim-links*
