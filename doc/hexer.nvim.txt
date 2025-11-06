@@ -156,11 +156,11 @@ element of the below type:
 
 >lua
     ---@class HexerConverter
-    ---@field accessor_key string
-    ---@field header string
-    ---@field is_type fun(str: string): boolean
-    ---@field to_value fun(str: string): integer
-    ---@field from_value fun(value: integer): string
+    ---@field accessor_key string                       Required for nui tables, can be similar to header
+    ---@field header string                             The title of the field as seen in the table
+    ---@field is_type fun(str: string): boolean         Whether or not a given string can be parsed by your format
+    ---@field to_value fun(str: string): integer        Convert from your format to an integer value
+    ---@field from_value fun(value: integer): string    Convert from an integer value to your format.
 <
 
 
