@@ -1,5 +1,5 @@
 ---@class HexerConfig
----@field converters HexerConverterGroup
+---@field converters HexerConverter[]
 ---@field popup_opts nui_popup_options
 ---@field table_opts nui_table_options
 local M = {
@@ -33,7 +33,7 @@ local M = {
 }
 
 ---@class HexerPartialConfig
----@field converters HexerConverterGroup?
+---@field converters HexerConverter[]?
 ---@field popup_opts nui_popup_options
 ---@field table_opts nui_table_options
 

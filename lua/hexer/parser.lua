@@ -9,7 +9,7 @@ local M = {
 ---@alias HexerItem HexerChar[]
 
 ---@param input string
----@param converters HexerConverterGroup
+---@param converters HexerConverter[]
 ---@return HexerItem
 function M.parse_input(input, converters)
     local value = tonumber(input)

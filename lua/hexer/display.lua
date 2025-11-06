@@ -8,7 +8,7 @@ local Parser = require("hexer.parser")
 ---@field _table NuiTable
 ---@field _popup_opts nui_popup_options
 ---@field _table_opts nui_table_options
----@field _converters HexerConverterGroup
+---@field _converters HexerConverter[]
 local M = {
     _saved_buf = 0,
     _saved_buf_opts = {
@@ -129,7 +129,7 @@ function M._apply_buf_opts(self)
 end
 
 ---Generate table columns from converter list
----@param converters HexerConverterGroup
+---@param converters HexerConverter[]
 ---@return NuiTable.ColumnDef[]
 function M._generate_columns(converters)
     ---@type NuiTable.ColumnDef[]
