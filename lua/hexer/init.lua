@@ -24,7 +24,7 @@ function M.setup(config)
         for _, v in ipairs(M._config.converters) do
             table.insert(all_converters, v)
         end
-        for _, v in ipairs(config.converters) do
+        for _, v in ipairs(config.converters or {}) do
             table.insert(all_converters, v)
         end
 
